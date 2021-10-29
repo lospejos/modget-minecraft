@@ -1,11 +1,11 @@
 plugins {
-    id 'fabric-loom' version '0.7-SNAPSHOT'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
     // id 'com.matthewprenger.cursegradle' version '1.4.0'
     id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 // def mod_version = project.mod_version as Object
 // version = "${mod_version}+${project.minecraft_version}"
@@ -61,7 +61,7 @@ dependencies {
 
     // DataBreaker applies a number of patches to eliminate the loading of data fixers
     // This greatly reduces the amount of time needed to start the game, but is generally unsafe in production
-    modRuntime ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+    modRuntimeOnly ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
         exclude module: "fabric-loader"
     }
 
@@ -112,7 +112,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.archivesBaseName}_${project.minecraft_version}"}
 	}
     archivesBaseName = "modget"
 }
